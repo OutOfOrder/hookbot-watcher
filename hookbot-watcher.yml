@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hookbot-watcher
+  labels:
+    app: hookbot-watcher
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: hookbot-watcher
+  template:
+    metadata:
+      labels:
+        app: hookbot-watcher
+    spec:
+      containers:
+      - name: hookbot-watcher
+        image: registry.outoforder.cc/apps/hookbot-watcher
+        ports:
+        - name: web
+          containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hookbot-watcher
+spec:
+  ports:
+  - protocol: TCP
+    name: web
+    port: 80
+  selector:
+    app: hookbot-watcher
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hookbot-watcher
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`wscat.brigadoon.outoforder.cc`)
+    kind: Rule
+    services:
+    - name: hookbot-watcher
+      port: web
+      kind: Service
+      namespace: default
+  tls: {}

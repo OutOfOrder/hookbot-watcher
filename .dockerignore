@@ -1,0 +1,14 @@
+*
+
+!src
+!public
+!index.html
+!package.json
+!vite.config.js
+!yarn.lock
+!.yarnrc.yml
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
