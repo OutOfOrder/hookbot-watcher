@@ -9,7 +9,16 @@ const props = defineProps({
   },
 });
 
-const messages = ref([]);
+const messages = ref([
+  // {
+  //   date: new Date(),
+  //   message: { "test":"payload" },
+  // },
+  // {
+  //   date: new Date(),
+  //   message: { "test":"payload", "larger": { "data": 123 } },
+  // },
+]);
 
 const wsUrl = computed(() => {
   if (!URL.canParse(props.url)) return null;

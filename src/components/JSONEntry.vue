@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
-import 'highlight.js/styles/a11y-light.css';
+import 'highlight.js/styles/intellij-light.css';
 import hljs from 'highlight.js/lib/core';
 import jsonLang from 'highlight.js/lib/languages/json.js';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
