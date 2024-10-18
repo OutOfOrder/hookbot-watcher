@@ -45,7 +45,12 @@ function openSocket(url) {
     websocket = new WebSocket(url);
     websocket.addEventListener('message', async (evt) => {
       const data = await evt.data.text();
-      const message = JSON.parse(data);
+      let message = data;
+      try {
+        message = JSON.parse(data);
+      } catch (ex) {
+        console.error("Error parsing message", ex);
+      }
       messages.value.push({ date: new Date(), message });
     });
   }

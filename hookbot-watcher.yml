@@ -19,6 +19,7 @@ spec:
       containers:
       - name: hookbot-watcher
         image: registry.outoforder.cc/apps/hookbot-watcher
+        imagePullPolicy: Always
         ports:
         - name: web
           containerPort: 80
