@@ -8,6 +8,11 @@ const wsUrl = ref(null);
 if (url.value) {
   wsUrl.value = url.value;
 }
+const tailRef = ref(null);
+
+function clearTail() {
+  tailRef.value.clearTail();
+}
 </script>
 
 <template lang="pug">
@@ -26,7 +31,9 @@ if (url.value) {
         button.button.is-primary(@click="wsUrl = url") Update
       p.control
         a.button.is-static(v-if="wsUrl") Watching...
-  WebsocketTail(v-if="wsUrl" :url="wsUrl")
+      p.control
+        a.button.is-secondary(v-if="wsUrl" @click="clearTail") Clear
+  WebsocketTail(v-if="wsUrl" ref="tailRef" :url="wsUrl")
 </template>
 
 <style scoped>

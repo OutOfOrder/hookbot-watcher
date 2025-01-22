@@ -63,6 +63,14 @@ watch(
   },
   { immediate: true },
 );
+
+function clearTail() {
+  messages.value = [];
+}
+
+defineExpose({
+  clearTail
+});
 </script>
 
 <template lang="pug">
