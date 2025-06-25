@@ -2,8 +2,9 @@
 import { computed, ref } from "vue";
 import 'highlight.js/styles/intellij-light.css';
 import hljs from 'highlight.js/lib/core';
-import jsonLang from 'highlight.js/lib/languages/json.js';
+import jsonLang from 'highlight.js/lib/languages/json';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
+import { OButton, useOruga } from "@oruga-ui/oruga-next";
 
 hljs.registerLanguage('json', jsonLang);
 
@@ -30,11 +31,25 @@ const json = computed(() => {
   }
 });
 
+function copyToClipboard() {
+  navigator.clipboard.writeText(JSON.stringify(props.message, null, 2));
+
+  useOruga().notification.open({
+    message: "Copied to clipboard",
+    variant: 'info',
+    position: 'bottom',
+    queue: true,
+  });
+}
+
 </script>
 
 <template lang="pug">
 .entry(@click="full = !full")
-  small {{ date?.toJSON() }}
+  small
+    | {{ date?.toJSON() }}
+    |
+    OButton(size="small" @click.stop="copyToClipboard") Copy
   HighlightJS(language="json" :code="json")
 </template>
 
