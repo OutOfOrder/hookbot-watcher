@@ -1,10 +1,11 @@
 <script setup>
-import { computed, ref } from "vue";
 import 'highlight.js/styles/intellij-light.css';
 import hljs from 'highlight.js/lib/core';
 import jsonLang from 'highlight.js/lib/languages/json';
+
 import hljsVuePlugin from "@highlightjs/vue-plugin";
-import { OButton, useOruga } from "@oruga-ui/oruga-next";
+import { OButton, OField, useOruga } from "@oruga-ui/oruga-next";
+import { computed, ref } from "vue";
 
 hljs.registerLanguage('json', jsonLang);
 
@@ -22,6 +23,8 @@ const props = defineProps({
 });
 
 const full = ref(false);
+
+const expandText = computed(() => full.value ? 'Collapse' : 'Expand');
 
 const json = computed(() => {
   if (full.value) {
@@ -45,11 +48,13 @@ function copyToClipboard() {
 </script>
 
 <template lang="pug">
-.entry(@click="full = !full")
-  small
+.entry
+  small(@click="full = !full")
     | {{ date?.toJSON() }}
     |
-    OButton(size="small" @click.stop="copyToClipboard") Copy
+    OField.is-inline(addons)
+      OButton(size="small" rounded @click.stop="copyToClipboard") Copy
+      OButton(size="small" rounded) {{ expandText }}
   HighlightJS(language="json" :code="json")
 </template>
 
@@ -61,6 +66,10 @@ function copyToClipboard() {
   small {
     border-left: 2px solid lightgreen;
     padding-left: 1ex;
+
+    .field.is-inline > :deep(.field-body) {
+      display: inline-flex;
+    }
   }
 
   pre {

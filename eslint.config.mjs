@@ -1,14 +1,9 @@
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
-import pluginVue from 'eslint-plugin-vue';
-import { FlatCompat } from "@eslint/eslintrc";
+import globals from 'globals';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import pluginImport from 'eslint-plugin-import';
+import pluginVue from 'eslint-plugin-vue';
+import pluginVuePug from 'eslint-plugin-vue-pug';
 
 export default [
   {
@@ -21,7 +16,27 @@ export default [
   },
   js.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  ...compat.extends("plugin:vue-pug/vue3-recommended"),
+  // ...compat.extends("plugin:vue-pug/vue3-recommended"),
+  ...pluginVuePug.configs['flat/recommended'],
+  {
+    plugins: { 'import': pluginImport },
+    rules: {
+      'import/no-duplicates': 'warn',
+      'import/order': ['warn', {
+        groups: [
+          'external',
+          'builtin',
+          'internal',
+          'sibling',
+          'parent',
+        ],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+        },
+      }],
+    },
+  },
   {
     rules: {
       semi: ["error", "always"],
@@ -47,6 +62,9 @@ export default [
         "error",
         "always-multiline",
       ],
+      'sort-imports': ['warn', {
+        ignoreDeclarationSort: true,
+      }],
       "vue/html-closing-bracket-newline": ["off"],
       "vue/no-this-in-before-route-enter": ["error"],
       "vue/no-unused-components": ["warn"],
@@ -59,6 +77,13 @@ export default [
         //   'allowFirstLine': true,
         // },
       }],
+    },
+  },
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
     },
   },
 ];
