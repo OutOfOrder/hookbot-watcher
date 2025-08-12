@@ -637,7 +637,10 @@ function openSocket(url) {
       } catch (ex) {
         console.error("Error parsing message", ex);
       }
-      messages.value.push({ date: new Date(), message });
+      messages.value.unshift({ date: new Date(), message });
+      if (messages.value.length > 1000) {
+        messages.value.length = 1000;
+      }
     });
   }
 }
@@ -667,7 +670,7 @@ defineExpose({
       OInput(:model-value="wsUrl" expanded readonly)
       OButton(size="small" variant="info" @click="clearTail" ) Clear
 
-    template(v-for="(msg, idx) in messages.toReversed()" :key="idx")
+    template(v-for="(msg, idx) in messages" :key="idx")
       JSONEntry(:date="msg.date" :message="msg.message")
 </template>
 
