@@ -2,6 +2,7 @@
 import 'highlight.js/styles/intellij-light.css';
 import hljs from 'highlight.js/lib/core';
 import jsonLang from 'highlight.js/lib/languages/json';
+import { DateTime } from "luxon";
 
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import { OButton, OField, useOruga } from "@oruga-ui/oruga-next";
@@ -17,7 +18,7 @@ const props = defineProps({
     required: true,
   },
   date: {
-    type:Date,
+    type:DateTime,
     required: true,
   },
 });
@@ -50,7 +51,7 @@ function copyToClipboard() {
 <template lang="pug">
 .entry
   small(@click="full = !full")
-    | {{ date?.toJSON() }}
+    | {{ date?.toFormat('DD TTT') }}
     |
     OField.is-inline(addons)
       OButton(size="small" rounded @click.stop="copyToClipboard") Copy
