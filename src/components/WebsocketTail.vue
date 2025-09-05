@@ -1,6 +1,8 @@
 <script setup>
+import { refThrottled } from "@vueuse/core";
+
 import { OButton, OField, OInput } from "@oruga-ui/oruga-next";
-import { computed, ref, watch } from "vue";
+import { computed, ref, shallowRef, watch } from "vue";
 
 import JSONEntry from "@/components/JSONEntry.vue";
 import { useMessageStore } from "@/stores/messages.js";
@@ -15,11 +17,12 @@ const props = defineProps({
 
 const messageStore = useMessageStore();
 
-const filter = ref(null);
+const filter = shallowRef(null);
+const filterThrottled = refThrottled(filter, 100, true, false);
 
 const messages = computed(() => {
-  if (filter.value) {
-    return messageStore.messages.filter(m => JSON.stringify(m.message).includes(filter.value));
+  if (filterThrottled.value) {
+    return messageStore.messages.filter(m => JSON.stringify(m.message).includes(filterThrottled.value));
   } else {
     return messageStore.messages;
   }
