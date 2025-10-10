@@ -412,25 +412,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oruga-ui/oruga-next@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "@oruga-ui/oruga-next@npm:0.11.0"
+"@oruga-ui/oruga-next@npm:^0.11.6":
+  version: 0.11.6
+  resolution: "@oruga-ui/oruga-next@npm:0.11.6"
   dependencies:
-    vue-component-type-helpers: "npm:^2.2.10"
+    vue-component-type-helpers: "npm:^3.0.5"
   peerDependencies:
     vue: ^3.0.0
-  checksum: 10c0/6a0b5191ffd05b0f93bb2b36775e8aacf963d0897f99a720c8251f72f9a93ff7e3829266fbb4d496f976d176c5eeeb398c7feca38d48c22a2b641e273cb2aeee
+  checksum: 10c0/9438296a2176ee11aef4e65bf5a07c90a1d654fdfa0ff8b8710a64244d521200d4090db7d5a83b708e633cc36a514ad7a8a21608a7bc8ff9389112326bd0a0cb
   languageName: node
   linkType: hard
 
-"@oruga-ui/theme-bulma@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@oruga-ui/theme-bulma@npm:0.7.0"
+"@oruga-ui/theme-bulma@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "@oruga-ui/theme-bulma@npm:0.7.3"
   dependencies:
     bulma: "npm:1.0.4"
   peerDependencies:
     "@oruga-ui/oruga-next": ^0.11.0
-  checksum: 10c0/7d87ff99b6ba44d864d2f46c94035e56b467c4ebf67d0d9812ddba0d54ff43176f2bcfcbc05c4ca3b7328a328901f2f2358c8c7d7627dc82fafa0dc1c6886e1f
+  checksum: 10c0/979189022a980c0c9bed60df49cfeb4d6ba0fea7515a48107e6664c485a7e9f14232d76463d4c77c98733877e117556fa28c2c361b2f09feaf7ea92b3d1f90b0
   languageName: node
   linkType: hard
 
@@ -2176,8 +2176,8 @@ __metadata:
     "@eslint/eslintrc": "npm:^3.3.1"
     "@eslint/js": "npm:^9.37.0"
     "@highlightjs/vue-plugin": "npm:2.1.2"
-    "@oruga-ui/oruga-next": "npm:^0.11.0"
-    "@oruga-ui/theme-bulma": "npm:^0.7.0"
+    "@oruga-ui/oruga-next": "npm:^0.11.6"
+    "@oruga-ui/theme-bulma": "npm:^0.7.3"
     "@vitejs/plugin-vue": "npm:^5.2.4"
     "@vueuse/core": "npm:^12.8.2"
     eslint: "npm:^9.37.0"
@@ -4286,10 +4286,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-component-type-helpers@npm:^2.2.10":
-  version: 2.2.10
-  resolution: "vue-component-type-helpers@npm:2.2.10"
-  checksum: 10c0/f4d2219941a6bb987dc813e5e132fa9f8880163efc73faa6871713241dae0358cbfb6ecbee3b7e6e2ef65c02e5b5a8204c6e44c4a7d213499957e4d36f8c99c7
+"vue-component-type-helpers@npm:^3.0.5":
+  version: 3.1.1
+  resolution: "vue-component-type-helpers@npm:3.1.1"
+  checksum: 10c0/f5d503efa70add1006bd90af38f43f6552dd356bb1b28782c7a6c708638c2ef9378d644c906ead161ca1c549af1b27e01805f9dc3ff8c323318b5bf5a24219c9
   languageName: node
   linkType: hard
 
