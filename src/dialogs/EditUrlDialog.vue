@@ -4,7 +4,6 @@ import { computed, ref, watch } from 'vue';
 
 import { confirm, showError } from "@/dialogs/index.js";
 import { useSessionStore } from "@/stores/session.js";
-import { uuidv4 } from "@/utils.js";
 
 const props = defineProps({
   record: { type: Object, required: true },

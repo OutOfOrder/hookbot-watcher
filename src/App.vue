@@ -1,6 +1,4 @@
 <script setup>
-import { useLocalStorage } from '@vueuse/core';
-
 import { computed } from "vue";
 
 import URLEditor from "@/components/URLEditor.vue";

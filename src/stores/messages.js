@@ -5,7 +5,7 @@ import { ref, watch } from "vue";
 
 import { uuidv4 } from "@/utils.js";
 
-function buildFakeMessages() {
+function _buildFakeMessages() {
   return [{
     "date": {
       "_custom": {
