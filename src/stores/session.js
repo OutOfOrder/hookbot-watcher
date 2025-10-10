@@ -1,5 +1,4 @@
 import { useLocalStorage } from "@vueuse/core";
-
 import { acceptHMRUpdate, defineStore } from "pinia";
 
 import { addUpdateRecord, removeRecord, uuidv4 } from "@/utils.js";

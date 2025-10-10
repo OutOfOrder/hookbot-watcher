@@ -1,7 +1,6 @@
 <script setup>
-import { refDebounced } from "@vueuse/core";
-
 import { OButton, OField, OInput } from "@oruga-ui/oruga-next";
+import { refDebounced } from "@vueuse/core";
 import { computed, shallowRef, watch } from "vue";
 
 import JSONEntry from "@/components/JSONEntry.vue";
