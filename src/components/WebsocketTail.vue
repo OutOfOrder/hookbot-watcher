@@ -1,7 +1,10 @@
 <script setup>
+
 import { OButton, OField, OInput } from "@oruga-ui/oruga-next";
+import { vElementBounding } from "@vueuse/components";
 import { refDebounced } from "@vueuse/core";
-import { computed, shallowRef, watch } from "vue";
+import { Sparkline } from 'sparkline-vue';
+import { computed, nextTick, ref, shallowRef, watch } from "vue";
 
 import JSONEntry from "@/components/JSONEntry.vue";
 import { useMessageStore } from "@/stores/messages.js";
@@ -41,6 +44,42 @@ watch(
   { immediate: true },
 );
 
+const timeLineData = ref([]);
+
+watch(
+  messages,
+  () => {
+    const data = Map.groupBy(messages.value, ({ date }) => {
+      return date.startOf('hour').toMillis();
+    }).entries()
+      .map(([key, value]) => [key, value.length])
+      .toArray()
+      .toSorted((a, b) => a[0] - b[0])
+      .map(([_, value]) => value);
+    if (data.length < 24) {
+      data.unshift(...Array(24 - data.length).fill(0));
+    }
+    timeLineData.value = data;
+  },
+  { immediate: true, deep: true },
+);
+
+const graphWidth = ref(100);
+
+async function onResizeGraph({ width }) {
+  console.log('rezize', width.value);
+  graphWidth.value = width.value;
+  const oldValue = timeLineData.value;
+  timeLineData.value = [];
+  await nextTick();
+  timeLineData.value = oldValue;
+}
+
+const graphResizeOptions = {
+  immediate: true,
+  updateTiming: 'next-frame',
+};
+
 </script>
 
 <template lang="pug">
@@ -54,6 +93,9 @@ watch(
       p.control
         a.button.is-static Filter
       OInput(v-model="filter" expanded placeholder="Filter message contents")
+
+  div(v-element-bounding="[onResizeGraph, graphResizeOptions]")
+    Sparkline(:data="timeLineData" :width="graphWidth")
 
   TransitionGroup.box(name="messages" tag="div")
     JSONEntry(

@@ -12,6 +12,10 @@ export function uuidv4() {
     });
 }
 
+export function randomChoice(list) {
+  return list[Math.floor(Math.random() * list.length)];
+}
+
 /**
  * Adds or updates the entry into the store
  *

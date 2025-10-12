@@ -915,7 +915,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^13.9.0":
+"@vueuse/components@npm:^13.9.0":
+  version: 13.9.0
+  resolution: "@vueuse/components@npm:13.9.0"
+  dependencies:
+    "@vueuse/core": "npm:13.9.0"
+    "@vueuse/shared": "npm:13.9.0"
+  peerDependencies:
+    vue: ^3.5.0
+  checksum: 10c0/37ed81436f540d8f8067f2893816e42978f5bf0da8f7acdd09ef0e6be4b292d2f3fbe0fdf671b493e7c32e14a9e144143b1dba073273f0e94f27775b20ece5a7
+  languageName: node
+  linkType: hard
+
+"@vueuse/core@npm:13.9.0, @vueuse/core@npm:^13.9.0":
   version: 13.9.0
   resolution: "@vueuse/core@npm:13.9.0"
   dependencies:
@@ -2360,6 +2372,7 @@ __metadata:
     "@oruga-ui/oruga-next": "npm:^0.11.6"
     "@oruga-ui/theme-bulma": "npm:^0.7.3"
     "@vitejs/plugin-vue": "npm:^6.0.1"
+    "@vueuse/components": "npm:^13.9.0"
     "@vueuse/core": "npm:^13.9.0"
     eslint: "npm:^9.37.0"
     eslint-import-resolver-vite: "npm:^2.1.0"
@@ -2372,6 +2385,7 @@ __metadata:
     pinia: "npm:^3.0.3"
     pug: "npm:^3.0.3"
     sass-embedded: "npm:^1.93.2"
+    sparkline-vue: "npm:^0.13.0"
     vite: "npm:^7.1.9"
     vue: "npm:^3.5.22"
   languageName: unknown
@@ -4149,6 +4163,15 @@ __metadata:
   version: 1.2.1
   resolution: "source-map-js@npm:1.2.1"
   checksum: 10c0/7bda1fc4c197e3c6ff17de1b8b2c20e60af81b63a52cb32ec5a5d67a20a7d42651e2cb34ebe93833c5a2a084377e17455854fee3e21e7925c64a51b6a52b0faf
+  languageName: node
+  linkType: hard
+
+"sparkline-vue@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "sparkline-vue@npm:0.13.0"
+  peerDependencies:
+    vue: ^3.0.0
+  checksum: 10c0/ea782bc649964318383c9530eefa784e4c867ed491c9888ddc4b35b77667c0219904364f2cd5d7607784d4ffe91b4de5ae61986b3474c65d4cfbc6b523354484
   languageName: node
   linkType: hard
 
