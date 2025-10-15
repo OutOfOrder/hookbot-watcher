@@ -49,15 +49,29 @@ const timeLineData = ref([]);
 watch(
   messages,
   () => {
-    const data = Map.groupBy(messages.value, ({ date }) => {
-      return date.startOf('hour').toMillis();
+    const raw_data = Map.groupBy(messages.value, ({ date }) => {
+      // move to every 15 minutes
+      return Math.round(date.startOf('minute').toSeconds() / 60 / 15);
     }).entries()
       .map(([key, value]) => [key, value.length])
       .toArray()
-      .toSorted((a, b) => a[0] - b[0])
-      .map(([_, value]) => value);
-    if (data.length < 2) {
-      data.unshift(0);
+      .toSorted((a, b) => a[0] - b[0]);
+    if (raw_data.length === 0) {
+      raw_data.unshift([0, 0]);
+    } else if (raw_data.length === 1) {
+      raw_data.unshift([raw_data[0][0] - 1, 0]);
+    }
+
+    const data = [];
+
+    let last_date = raw_data[0][0];
+    for (const entry of raw_data) {
+      while ((entry[0] - last_date) > 1) {
+        data.push(0);
+        last_date++;
+      }
+
+      data.push(entry[1]);
     }
     timeLineData.value = data;
   },

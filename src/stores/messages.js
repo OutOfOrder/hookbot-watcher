@@ -90,6 +90,7 @@ export const useMessageStore = defineStore('messages', () => {
 
   function clearTail() {
     messages.value = [];
+    // messages.value = _buildFakeMessages();
   }
 
   let websocket = null;
