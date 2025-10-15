@@ -46,12 +46,15 @@ watch(
 
 const timeLineData = ref([]);
 
+const MAX_POINTS = 30;
+const AGGREGATION_BREAKS = [5, 10, 15, 20, 30, 60];
+
 watch(
   messages,
   () => {
     const raw_data = Map.groupBy(messages.value, ({ date }) => {
-      // move to every 15 minutes
-      return Math.round(date.startOf('minute').toSeconds() / 60 / 15);
+      // move to every minute
+      return Math.round(date.startOf('minute').toSeconds() / 60);
     }).entries()
       .map(([key, value]) => [key, value.length])
       .toArray()
@@ -62,18 +65,35 @@ watch(
       raw_data.unshift([raw_data[0][0] - 1, 0]);
     }
 
-    const data = [];
+    let data = [];
 
     let last_date = raw_data[0][0];
     for (const entry of raw_data) {
       while ((entry[0] - last_date) > 1) {
-        data.push(0);
+        data.push([0,0]);
         last_date++;
       }
 
-      data.push(entry[1]);
+      data.push(entry);
     }
-    timeLineData.value = data;
+    raw_data.length = 0;
+
+    if (data.length > MAX_POINTS) {
+      for (const value of AGGREGATION_BREAKS) {
+        if ((data.length / value) < MAX_POINTS) {
+          const new_data = new Map();
+          for (const entry of data) {
+            const key = Math.round(entry[0] / value);
+            const current = new_data.get(key) || 0;
+            new_data.set(key, current + entry[1]);
+          }
+          data = new_data.entries().toArray();
+          break;
+        }
+      }
+    }
+    console.debug("Points", data.length);
+    timeLineData.value = data.map(v => v[1]);
   },
   { immediate: true, deep: true },
 );
