@@ -20,7 +20,7 @@ const props = defineProps({
 const messageStore = useMessageStore();
 
 const filter = shallowRef(null);
-const filterThrottled = refDebounced(filter, 200);
+const filterThrottled = refDebounced(filter, 500);
 
 const messages = computed(() => {
   if (filterThrottled.value) {
@@ -56,8 +56,8 @@ watch(
       .toArray()
       .toSorted((a, b) => a[0] - b[0])
       .map(([_, value]) => value);
-    if (data.length < 24) {
-      data.unshift(...Array(24 - data.length).fill(0));
+    if (data.length < 2) {
+      data.unshift(0);
     }
     timeLineData.value = data;
   },
