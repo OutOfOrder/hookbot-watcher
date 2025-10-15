@@ -92,7 +92,6 @@ watch(
         }
       }
     }
-    console.debug("Points", data.length);
     timeLineData.value = data.map(v => v[1]);
   },
   { immediate: true, deep: true },
@@ -101,7 +100,6 @@ watch(
 const graphWidth = ref(100);
 
 async function onResizeGraph({ width }) {
-  console.log('rezize', width.value);
   graphWidth.value = width.value;
   const oldValue = timeLineData.value;
   timeLineData.value = [];
